@@ -1,29 +1,15 @@
 
 import React, { useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { Icon } from 'leaflet';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { useLanguage } from '../contexts/LanguageContext';
-import 'leaflet/dist/leaflet.css';
-
-// Fix for default markers in react-leaflet
-const customIcon = new Icon({
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41]
-});
+import { MapPin } from 'lucide-react';
 
 interface Property {
   id: number;
   title: string;
   price: string;
   location: string;
-  coordinates: [number, number];
   beds: number;
   baths: number;
   sqft: string;
@@ -33,16 +19,13 @@ interface Property {
 }
 
 const InteractiveMap = () => {
-  const { t } = useLanguage();
-  
-  // Sample properties with coordinates
+  // Sample properties
   const properties: Property[] = [
     {
       id: 1,
       title: "Modern Luxury Villa",
       price: "$850,000",
       location: "Beverly Hills, CA",
-      coordinates: [34.0736, -118.4004],
       beds: 4,
       baths: 3,
       sqft: "2,500",
@@ -55,7 +38,6 @@ const InteractiveMap = () => {
       title: "Downtown Apartment",
       price: "$3,200/month",
       location: "Manhattan, NY",
-      coordinates: [40.7831, -73.9712],
       beds: 2,
       baths: 2,
       sqft: "1,200",
@@ -68,7 +50,6 @@ const InteractiveMap = () => {
       title: "Family Suburban Home",
       price: "$650,000",
       location: "Austin, TX",
-      coordinates: [30.2672, -97.7431],
       beds: 3,
       baths: 2,
       sqft: "1,800",
@@ -81,7 +62,6 @@ const InteractiveMap = () => {
       title: "Waterfront Condo",
       price: "$1,200,000",
       location: "Miami, FL",
-      coordinates: [25.7617, -80.1918],
       beds: 3,
       baths: 3,
       sqft: "2,100",
@@ -101,49 +81,36 @@ const InteractiveMap = () => {
             Interactive Property Map
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Explore properties on our interactive map. Click on markers to view details.
+            Explore properties on our interactive map. Click on properties to view details.
           </p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Map Container */}
+          {/* Map Placeholder */}
           <div className="lg:col-span-2">
             <Card className="overflow-hidden">
-              <div className="h-[600px] w-full">
-                <MapContainer
-                  center={[39.8283, -98.5795]}
-                  zoom={4}
-                  style={{ height: '100%', width: '100%' }}
-                >
-                  <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  />
+              <div className="h-[600px] w-full bg-gradient-to-br from-blue-50 to-green-50 flex flex-col items-center justify-center">
+                <MapPin className="w-16 h-16 text-primary mb-4" />
+                <h3 className="text-xl font-semibold text-primary mb-2">Interactive Map Coming Soon</h3>
+                <p className="text-muted-foreground text-center max-w-md">
+                  Our interactive property map will be available here. Browse properties below to get started.
+                </p>
+                <div className="mt-6 grid grid-cols-2 gap-3">
                   {properties.map((property) => (
-                    <Marker
+                    <button
                       key={property.id}
-                      position={property.coordinates}
-                      icon={customIcon}
-                      eventHandlers={{
-                        click: () => setSelectedProperty(property),
-                      }}
+                      onClick={() => setSelectedProperty(property)}
+                      className="p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow text-left"
                     >
-                      <Popup>
-                        <div className="p-2">
-                          <h3 className="font-semibold text-sm mb-1">{property.title}</h3>
-                          <p className="text-lg font-bold text-primary mb-1">{property.price}</p>
-                          <p className="text-xs text-muted-foreground mb-2">{property.location}</p>
-                          <div className="flex gap-2 text-xs mb-2">
-                            <span>{property.beds} beds</span>
-                            <span>{property.baths} baths</span>
-                            <span>{property.sqft} sqft</span>
-                          </div>
-                          <Button size="sm" className="text-xs">View Details</Button>
-                        </div>
-                      </Popup>
-                    </Marker>
+                      <div className="flex items-center gap-2 mb-1">
+                        <MapPin className="w-4 h-4 text-primary" />
+                        <span className="font-medium text-sm">{property.title}</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground">{property.location}</p>
+                      <p className="text-sm font-bold text-primary">{property.price}</p>
+                    </button>
                   ))}
-                </MapContainer>
+                </div>
               </div>
             </Card>
           </div>
@@ -194,7 +161,7 @@ const InteractiveMap = () => {
                 <CardContent className="p-8 text-center">
                   <div className="text-muted-foreground">
                     <p className="mb-2">Select a property</p>
-                    <p className="text-sm">Click on a map marker to view property details</p>
+                    <p className="text-sm">Click on a property above to view details</p>
                   </div>
                 </CardContent>
               </Card>
