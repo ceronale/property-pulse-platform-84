@@ -97,7 +97,9 @@ const InteractiveMap = () => {
     <section className="py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-primary mb-4">{t('map.title') || 'Interactive Property Map'}</h2>
+          <h2 className="text-3xl font-bold text-primary mb-4">
+            {t('map.title') || 'Interactive Property Map'}
+          </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             {t('map.description') || 'Explore properties on our interactive map. Click on markers to view details.'}
           </p>
@@ -112,7 +114,6 @@ const InteractiveMap = () => {
                   center={[39.8283, -98.5795]}
                   zoom={4}
                   style={{ height: '100%', width: '100%' }}
-                  whenCreated={() => {}}
                 >
                   <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
