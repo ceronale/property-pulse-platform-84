@@ -112,7 +112,7 @@ const InteractiveMap = () => {
                   center={[39.8283, -98.5795]}
                   zoom={4}
                   style={{ height: '100%', width: '100%' }}
-                  key="map-container"
+                  whenCreated={() => {}}
                 >
                   <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
