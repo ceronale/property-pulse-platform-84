@@ -200,7 +200,7 @@ const InteractiveMap = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
