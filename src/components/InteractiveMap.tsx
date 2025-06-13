@@ -18,11 +18,25 @@ const customIcon = new Icon({
   shadowSize: [41, 41]
 });
 
+interface Property {
+  id: number;
+  title: string;
+  price: string;
+  location: string;
+  coordinates: [number, number];
+  beds: number;
+  baths: number;
+  sqft: string;
+  image: string;
+  status: string;
+  featured: boolean;
+}
+
 const InteractiveMap = () => {
   const { t } = useLanguage();
   
   // Sample properties with coordinates
-  const properties = [
+  const properties: Property[] = [
     {
       id: 1,
       title: "Modern Luxury Villa",
@@ -77,7 +91,7 @@ const InteractiveMap = () => {
     }
   ];
 
-  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
 
   return (
     <section className="py-16">
@@ -186,7 +200,7 @@ const InteractiveMap = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
