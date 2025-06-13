@@ -3,9 +3,12 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { User, Search, Map } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
+import LanguageSelector from './LanguageSelector';
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <nav className="bg-white shadow-sm border-b sticky top-0 z-50">
@@ -20,36 +23,37 @@ const Navbar = () => {
 
           <div className="hidden md:flex items-center space-x-6">
             <Link to="/properties" className="text-muted-foreground hover:text-primary transition-colors">
-              Buy
+              {t('nav.buy')}
             </Link>
             <Link to="/properties" className="text-muted-foreground hover:text-primary transition-colors">
-              Rent
+              {t('nav.rent')}
             </Link>
             <Link to="/sell" className="text-muted-foreground hover:text-primary transition-colors">
-              Sell
+              {t('nav.sell')}
             </Link>
             <Link to="/map" className="text-muted-foreground hover:text-primary transition-colors">
-              Map View
+              {t('nav.map')}
             </Link>
           </div>
 
           <div className="flex items-center space-x-3">
             <Button variant="ghost" size="sm">
               <Search className="w-4 h-4 mr-2" />
-              Search
+              {t('nav.search')}
             </Button>
+            <LanguageSelector />
             {isLoggedIn ? (
               <Button variant="outline" size="sm">
                 <User className="w-4 h-4 mr-2" />
-                Dashboard
+                {t('nav.dashboard')}
               </Button>
             ) : (
               <div className="flex space-x-2">
                 <Link to="/login">
-                  <Button variant="ghost" size="sm">Log In</Button>
+                  <Button variant="ghost" size="sm">{t('nav.login')}</Button>
                 </Link>
                 <Link to="/signup">
-                  <Button size="sm">Sign Up</Button>
+                  <Button size="sm">{t('nav.signup')}</Button>
                 </Link>
               </div>
             )}

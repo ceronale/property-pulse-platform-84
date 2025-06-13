@@ -3,8 +3,11 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const FeaturedProperties = () => {
+  const { t } = useLanguage();
+
   const properties = [
     {
       id: 1,
@@ -60,9 +63,9 @@ const FeaturedProperties = () => {
     <section className="py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-primary mb-4">Featured Properties</h2>
+          <h2 className="text-3xl font-bold text-primary mb-4">{t('featured.title')}</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Discover our hand-picked selection of premium properties in the most desirable locations.
+            {t('featured.description')}
           </p>
         </div>
         
@@ -77,10 +80,10 @@ const FeaturedProperties = () => {
                 />
                 <div className="absolute top-3 left-3 flex gap-2">
                   <Badge variant={property.status === 'For Sale' ? 'default' : 'secondary'}>
-                    {property.status}
+                    {property.status === 'For Sale' ? t('featured.forSale') : t('featured.forRent')}
                   </Badge>
                   {property.featured && (
-                    <Badge variant="destructive">Featured</Badge>
+                    <Badge variant="destructive">{t('featured.featured')}</Badge>
                   )}
                 </div>
               </div>
@@ -91,19 +94,19 @@ const FeaturedProperties = () => {
                 <p className="text-muted-foreground text-sm mb-3">{property.location}</p>
                 
                 <div className="flex justify-between text-sm text-muted-foreground mb-4">
-                  <span>{property.beds} beds</span>
-                  <span>{property.baths} baths</span>
-                  <span>{property.sqft} sqft</span>
+                  <span>{property.beds} {t('featured.beds')}</span>
+                  <span>{property.baths} {t('featured.baths')}</span>
+                  <span>{property.sqft} {t('featured.sqft')}</span>
                 </div>
                 
-                <Button className="w-full" variant="outline">View Details</Button>
+                <Button className="w-full" variant="outline">{t('featured.viewDetails')}</Button>
               </CardContent>
             </Card>
           ))}
         </div>
         
         <div className="text-center mt-12">
-          <Button size="lg" variant="outline">View All Properties</Button>
+          <Button size="lg" variant="outline">{t('featured.viewAll')}</Button>
         </div>
       </div>
     </section>
