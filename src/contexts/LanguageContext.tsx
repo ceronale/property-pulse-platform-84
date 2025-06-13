@@ -3,44 +3,34 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'en' | 'es' | 'fr';
 
-interface LanguageContextType {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+interface Translations {
+  [key: string]: {
+    [key: string]: string;
+  };
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
-
-const translations = {
+const translations: Translations = {
   en: {
     // Navigation
     'nav.buy': 'Buy',
-    'nav.rent': 'Rent',
+    'nav.rent': 'Rent', 
     'nav.sell': 'Sell',
-    'nav.map': 'Map View',
+    'nav.map': 'Map',
     'nav.search': 'Search',
-    'nav.login': 'Log In',
+    'nav.login': 'Login',
     'nav.signup': 'Sign Up',
     'nav.dashboard': 'Dashboard',
     
-    // Hero Section
-    'hero.title': 'Find Your Perfect',
-    'hero.subtitle': 'Dream Home',
-    'hero.description': 'Discover thousands of properties for sale and rent. From luxury homes to affordable apartments, find the perfect place to call home.',
-    'hero.searchPlaceholder': 'Enter city, neighborhood, or address...',
+    // Hero
+    'hero.title': 'Find Your Dream',
+    'hero.subtitle': 'Property Today',
+    'hero.description': 'Discover the perfect home with our advanced search filters and interactive map. Browse thousands of properties from trusted sellers.',
+    'hero.searchPlaceholder': 'Enter location, property type, or keywords...',
     'hero.popularSearches': 'Popular searches:',
-    
-    // Search Filters
-    'filters.propertyType': 'Property Type',
-    'filters.priceRange': 'Price Range',
-    'filters.bedrooms': 'Bedrooms',
-    'filters.bathrooms': 'Bathrooms',
-    'filters.applyFilters': 'Apply Filters',
-    'filters.clearAll': 'Clear All',
     
     // Featured Properties
     'featured.title': 'Featured Properties',
-    'featured.description': 'Discover our hand-picked selection of premium properties in the most desirable locations.',
+    'featured.description': 'Handpicked properties that offer the best value and location for your investment.',
     'featured.forSale': 'For Sale',
     'featured.forRent': 'For Rent',
     'featured.featured': 'Featured',
@@ -50,8 +40,15 @@ const translations = {
     'featured.viewDetails': 'View Details',
     'featured.viewAll': 'View All Properties',
     
+    // Map
+    'map.title': 'Interactive Property Map',
+    'map.description': 'Explore properties on our interactive map. Click on markers to view details.',
+    'map.selectProperty': 'Select a property',
+    'map.clickMarker': 'Click on a map marker to view property details',
+    'map.contact': 'Contact Seller',
+    
     // Footer
-    'footer.tagline': 'Your trusted partner in finding the perfect property. Connecting buyers, sellers, and renters since 2024.',
+    'footer.tagline': 'Your trusted partner in finding the perfect property.',
     'footer.forBuyers': 'For Buyers',
     'footer.browseProperties': 'Browse Properties',
     'footer.mapSearch': 'Map Search',
@@ -69,81 +66,69 @@ const translations = {
     'footer.privacy': 'Privacy Policy',
     'footer.copyright': '© 2024 RealEstate Pro. All rights reserved.',
     
-    // Auth Pages
-    'auth.welcomeBack': 'Welcome Back',
-    'auth.signInAccount': 'Sign in to your account',
-    'auth.signIn': 'Sign In',
+    // Auth
+    'auth.login': 'Login',
+    'auth.signup': 'Sign Up',
     'auth.email': 'Email',
     'auth.password': 'Password',
+    'auth.confirmPassword': 'Confirm Password',
+    'auth.fullName': 'Full Name',
+    'auth.rememberMe': 'Remember me',
     'auth.forgotPassword': 'Forgot your password?',
     'auth.noAccount': "Don't have an account?",
-    'auth.signUpHere': 'Sign up here',
-    'auth.createAccount': 'Create Account',
-    'auth.joinHunters': 'Join thousands of property hunters',
-    'auth.signUp': 'Sign Up',
-    'auth.firstName': 'First Name',
-    'auth.lastName': 'Last Name',
-    'auth.userType': 'I am a',
-    'auth.selectRole': 'Select your role',
-    'auth.buyer': 'Buyer',
-    'auth.seller': 'Seller',
-    'auth.both': 'Both Buyer & Seller',
-    'auth.createPassword': 'Create a strong password',
-    'auth.confirmPassword': 'Confirm your password',
-    'auth.createAccountBtn': 'Create Account',
     'auth.hasAccount': 'Already have an account?',
-    'auth.signInHere': 'Sign in here',
+    'auth.signupHere': 'Sign up here',
+    'auth.loginHere': 'Login here',
   },
   es: {
     // Navigation
     'nav.buy': 'Comprar',
     'nav.rent': 'Alquilar',
     'nav.sell': 'Vender',
-    'nav.map': 'Vista de Mapa',
+    'nav.map': 'Mapa',
     'nav.search': 'Buscar',
     'nav.login': 'Iniciar Sesión',
     'nav.signup': 'Registrarse',
     'nav.dashboard': 'Panel',
     
-    // Hero Section
-    'hero.title': 'Encuentra Tu',
-    'hero.subtitle': 'Casa Perfecta',
-    'hero.description': 'Descubre miles de propiedades en venta y alquiler. Desde casas de lujo hasta apartamentos asequibles, encuentra el lugar perfecto para llamar hogar.',
-    'hero.searchPlaceholder': 'Ingresa ciudad, barrio o dirección...',
+    // Hero
+    'hero.title': 'Encuentra la',
+    'hero.subtitle': 'Propiedad de tus Sueños',
+    'hero.description': 'Descubre el hogar perfecto con nuestros filtros de búsqueda avanzados y mapa interactivo. Explora miles de propiedades de vendedores confiables.',
+    'hero.searchPlaceholder': 'Ingresa ubicación, tipo de propiedad o palabras clave...',
     'hero.popularSearches': 'Búsquedas populares:',
-    
-    // Search Filters
-    'filters.propertyType': 'Tipo de Propiedad',
-    'filters.priceRange': 'Rango de Precio',
-    'filters.bedrooms': 'Habitaciones',
-    'filters.bathrooms': 'Baños',
-    'filters.applyFilters': 'Aplicar Filtros',
-    'filters.clearAll': 'Limpiar Todo',
     
     // Featured Properties
     'featured.title': 'Propiedades Destacadas',
-    'featured.description': 'Descubre nuestra selección cuidadosamente elegida de propiedades premium en las ubicaciones más deseables.',
+    'featured.description': 'Propiedades seleccionadas que ofrecen el mejor valor y ubicación para tu inversión.',
     'featured.forSale': 'En Venta',
     'featured.forRent': 'En Alquiler',
-    'featured.featured': 'Destacado',
+    'featured.featured': 'Destacada',
     'featured.beds': 'hab',
     'featured.baths': 'baños',
     'featured.sqft': 'm²',
     'featured.viewDetails': 'Ver Detalles',
     'featured.viewAll': 'Ver Todas las Propiedades',
     
+    // Map
+    'map.title': 'Mapa Interactivo de Propiedades',
+    'map.description': 'Explora propiedades en nuestro mapa interactivo. Haz clic en los marcadores para ver detalles.',
+    'map.selectProperty': 'Selecciona una propiedad',
+    'map.clickMarker': 'Haz clic en un marcador del mapa para ver los detalles de la propiedad',
+    'map.contact': 'Contactar Vendedor',
+    
     // Footer
-    'footer.tagline': 'Tu socio de confianza para encontrar la propiedad perfecta. Conectando compradores, vendedores e inquilinos desde 2024.',
+    'footer.tagline': 'Tu socio de confianza para encontrar la propiedad perfecta.',
     'footer.forBuyers': 'Para Compradores',
     'footer.browseProperties': 'Explorar Propiedades',
     'footer.mapSearch': 'Búsqueda en Mapa',
     'footer.savedSearches': 'Búsquedas Guardadas',
     'footer.propertyAlerts': 'Alertas de Propiedades',
     'footer.forSellers': 'Para Vendedores',
-    'footer.listProperty': 'Listar Tu Propiedad',
+    'footer.listProperty': 'Publicar Propiedad',
     'footer.sellerDashboard': 'Panel del Vendedor',
     'footer.marketAnalysis': 'Análisis de Mercado',
-    'footer.pricingTools': 'Herramientas de Precios',
+    'footer.pricingTools': 'Herramientas de Precio',
     'footer.support': 'Soporte',
     'footer.helpCenter': 'Centro de Ayuda',
     'footer.contactUs': 'Contáctanos',
@@ -151,79 +136,67 @@ const translations = {
     'footer.privacy': 'Política de Privacidad',
     'footer.copyright': '© 2024 RealEstate Pro. Todos los derechos reservados.',
     
-    // Auth Pages
-    'auth.welcomeBack': 'Bienvenido de Nuevo',
-    'auth.signInAccount': 'Inicia sesión en tu cuenta',
-    'auth.signIn': 'Iniciar Sesión',
+    // Auth
+    'auth.login': 'Iniciar Sesión',
+    'auth.signup': 'Registrarse',
     'auth.email': 'Correo Electrónico',
     'auth.password': 'Contraseña',
+    'auth.confirmPassword': 'Confirmar Contraseña',
+    'auth.fullName': 'Nombre Completo',
+    'auth.rememberMe': 'Recordarme',
     'auth.forgotPassword': '¿Olvidaste tu contraseña?',
     'auth.noAccount': '¿No tienes una cuenta?',
-    'auth.signUpHere': 'Regístrate aquí',
-    'auth.createAccount': 'Crear Cuenta',
-    'auth.joinHunters': 'Únete a miles de buscadores de propiedades',
-    'auth.signUp': 'Registrarse',
-    'auth.firstName': 'Nombre',
-    'auth.lastName': 'Apellido',
-    'auth.userType': 'Soy un',
-    'auth.selectRole': 'Selecciona tu rol',
-    'auth.buyer': 'Comprador',
-    'auth.seller': 'Vendedor',
-    'auth.both': 'Comprador y Vendedor',
-    'auth.createPassword': 'Crea una contraseña segura',
-    'auth.confirmPassword': 'Confirma tu contraseña',
-    'auth.createAccountBtn': 'Crear Cuenta',
     'auth.hasAccount': '¿Ya tienes una cuenta?',
-    'auth.signInHere': 'Inicia sesión aquí',
+    'auth.signupHere': 'Regístrate aquí',
+    'auth.loginHere': 'Inicia sesión aquí',
   },
   fr: {
     // Navigation
     'nav.buy': 'Acheter',
     'nav.rent': 'Louer',
     'nav.sell': 'Vendre',
-    'nav.map': 'Vue Carte',
+    'nav.map': 'Carte',
     'nav.search': 'Rechercher',
-    'nav.login': 'Se Connecter',
+    'nav.login': 'Connexion',
     'nav.signup': "S'inscrire",
-    'nav.dashboard': 'Tableau de Bord',
+    'nav.dashboard': 'Tableau de bord',
     
-    // Hero Section
-    'hero.title': 'Trouvez Votre',
-    'hero.subtitle': 'Maison de Rêve',
-    'hero.description': 'Découvrez des milliers de propriétés à vendre et à louer. Des maisons de luxe aux appartements abordables, trouvez l\'endroit parfait pour vous sentir chez vous.',
-    'hero.searchPlaceholder': 'Entrez ville, quartier ou adresse...',
+    // Hero
+    'hero.title': 'Trouvez la Propriété',
+    'hero.subtitle': 'de vos Rêves',
+    'hero.description': 'Découvrez la maison parfaite avec nos filtres de recherche avancés et notre carte interactive. Parcourez des milliers de propriétés de vendeurs de confiance.',
+    'hero.searchPlaceholder': 'Entrez un lieu, type de propriété ou mots-clés...',
     'hero.popularSearches': 'Recherches populaires:',
-    
-    // Search Filters
-    'filters.propertyType': 'Type de Propriété',
-    'filters.priceRange': 'Gamme de Prix',
-    'filters.bedrooms': 'Chambres',
-    'filters.bathrooms': 'Salles de Bain',
-    'filters.applyFilters': 'Appliquer les Filtres',
-    'filters.clearAll': 'Tout Effacer',
     
     // Featured Properties
     'featured.title': 'Propriétés en Vedette',
-    'featured.description': 'Découvrez notre sélection soigneusement choisie de propriétés premium dans les emplacements les plus recherchés.',
+    'featured.description': 'Propriétés sélectionnées qui offrent la meilleure valeur et emplacement pour votre investissement.',
     'featured.forSale': 'À Vendre',
     'featured.forRent': 'À Louer',
-    'featured.featured': 'En Vedette',
+    'featured.featured': 'En vedette',
     'featured.beds': 'ch',
     'featured.baths': 'sdb',
     'featured.sqft': 'm²',
     'featured.viewDetails': 'Voir Détails',
     'featured.viewAll': 'Voir Toutes les Propriétés',
     
+    // Map
+    'map.title': 'Carte Interactive des Propriétés',
+    'map.description': 'Explorez les propriétés sur notre carte interactive. Cliquez sur les marqueurs pour voir les détails.',
+    'map.selectProperty': 'Sélectionnez une propriété',
+    'map.clickMarker': 'Cliquez sur un marqueur de la carte pour voir les détails de la propriété',
+    'map.contact': 'Contacter le Vendeur',
+    
     // Footer
-    'footer.tagline': 'Votre partenaire de confiance pour trouver la propriété parfaite. Connectant acheteurs, vendeurs et locataires depuis 2024.',
+    'footer.tagline': 'Votre partenaire de confiance pour trouver la propriété parfaite.',
     'footer.forBuyers': 'Pour les Acheteurs',
     'footer.browseProperties': 'Parcourir les Propriétés',
-    'footer.mapSearch': 'Recherche Carte',
+    'footer.mapSearch': 'Recherche sur Carte',
     'footer.savedSearches': 'Recherches Sauvegardées',
-    'footer.propertyAlerts': 'Alertes Propriétés',
+    'footer.propertyAlerts': 'Alertes de Propriétés',
     'footer.forSellers': 'Pour les Vendeurs',
-    'footer.listProperty': 'Lister Votre Propriété',
-    'footer.sellerDashboard': 'Tableau de Bord Vendeur',
+    'footer.listProperty': 'Lister une Propriété',
+    'footer.sellerDashboard': 'Tableau de bord Vendeur',
     'footer.marketAnalysis': 'Analyse de Marché',
     'footer.pricingTools': 'Outils de Prix',
     'footer.support': 'Support',
@@ -233,38 +206,35 @@ const translations = {
     'footer.privacy': 'Politique de Confidentialité',
     'footer.copyright': '© 2024 RealEstate Pro. Tous droits réservés.',
     
-    // Auth Pages
-    'auth.welcomeBack': 'Bon Retour',
-    'auth.signInAccount': 'Connectez-vous à votre compte',
-    'auth.signIn': 'Se Connecter',
+    // Auth
+    'auth.login': 'Connexion',
+    'auth.signup': "S'inscrire",
     'auth.email': 'Email',
-    'auth.password': 'Mot de Passe',
+    'auth.password': 'Mot de passe',
+    'auth.confirmPassword': 'Confirmer le mot de passe',
+    'auth.fullName': 'Nom complet',
+    'auth.rememberMe': 'Se souvenir de moi',
     'auth.forgotPassword': 'Mot de passe oublié?',
     'auth.noAccount': "Vous n'avez pas de compte?",
-    'auth.signUpHere': 'Inscrivez-vous ici',
-    'auth.createAccount': 'Créer un Compte',
-    'auth.joinHunters': 'Rejoignez des milliers de chasseurs de propriétés',
-    'auth.signUp': "S'inscrire",
-    'auth.firstName': 'Prénom',
-    'auth.lastName': 'Nom',
-    'auth.userType': 'Je suis un',
-    'auth.selectRole': 'Sélectionnez votre rôle',
-    'auth.buyer': 'Acheteur',
-    'auth.seller': 'Vendeur',
-    'auth.both': 'Acheteur et Vendeur',
-    'auth.createPassword': 'Créez un mot de passe fort',
-    'auth.confirmPassword': 'Confirmez votre mot de passe',
-    'auth.createAccountBtn': 'Créer un Compte',
     'auth.hasAccount': 'Vous avez déjà un compte?',
-    'auth.signInHere': 'Connectez-vous ici',
+    'auth.signupHere': 'Inscrivez-vous ici',
+    'auth.loginHere': 'Connectez-vous ici',
   }
 };
 
-export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+interface LanguageContextType {
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  t: (key: string) => string;
+}
+
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<Language>('en');
 
   const t = (key: string): string => {
-    return translations[language][key] || key;
+    return translations[language]?.[key] || key;
   };
 
   return (
@@ -276,7 +246,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
 
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
   return context;
