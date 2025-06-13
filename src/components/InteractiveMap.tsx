@@ -109,9 +109,10 @@ const InteractiveMap = () => {
             <Card className="overflow-hidden">
               <div className="h-[600px] w-full">
                 <MapContainer
-                  center={[39.8283, -98.5795]} // Center of USA
+                  center={[39.8283, -98.5795]}
                   zoom={4}
                   style={{ height: '100%', width: '100%' }}
+                  key="map-container"
                 >
                   <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
