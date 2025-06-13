@@ -98,10 +98,10 @@ const InteractiveMap = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-primary mb-4">
-            {t('map.title') || 'Interactive Property Map'}
+            Interactive Property Map
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            {t('map.description') || 'Explore properties on our interactive map. Click on markers to view details.'}
+            Explore properties on our interactive map. Click on markers to view details.
           </p>
         </div>
         
@@ -160,10 +160,10 @@ const InteractiveMap = () => {
                   />
                   <div className="flex gap-2 mb-3">
                     <Badge variant={selectedProperty.status === 'For Sale' ? 'default' : 'secondary'}>
-                      {selectedProperty.status === 'For Sale' ? (t('featured.forSale') || 'For Sale') : (t('featured.forRent') || 'For Rent')}
+                      {selectedProperty.status === 'For Sale' ? 'For Sale' : 'For Rent'}
                     </Badge>
                     {selectedProperty.featured && (
-                      <Badge variant="destructive">{t('featured.featured') || 'Featured'}</Badge>
+                      <Badge variant="destructive">Featured</Badge>
                     )}
                   </div>
                   <h3 className="font-semibold text-lg mb-2">{selectedProperty.title}</h3>
@@ -173,28 +173,28 @@ const InteractiveMap = () => {
                   <div className="grid grid-cols-3 gap-2 text-sm text-muted-foreground mb-4">
                     <div className="text-center">
                       <div className="font-semibold">{selectedProperty.beds}</div>
-                      <div>{t('featured.beds') || 'Beds'}</div>
+                      <div>Beds</div>
                     </div>
                     <div className="text-center">
                       <div className="font-semibold">{selectedProperty.baths}</div>
-                      <div>{t('featured.baths') || 'Baths'}</div>
+                      <div>Baths</div>
                     </div>
                     <div className="text-center">
                       <div className="font-semibold">{selectedProperty.sqft}</div>
-                      <div>{t('featured.sqft') || 'Sqft'}</div>
+                      <div>Sqft</div>
                     </div>
                   </div>
                   
-                  <Button className="w-full mb-2">{t('featured.viewDetails') || 'View Details'}</Button>
-                  <Button variant="outline" className="w-full">{t('map.contact') || 'Contact Seller'}</Button>
+                  <Button className="w-full mb-2">View Details</Button>
+                  <Button variant="outline" className="w-full">Contact Seller</Button>
                 </CardContent>
               </Card>
             ) : (
               <Card>
                 <CardContent className="p-8 text-center">
                   <div className="text-muted-foreground">
-                    <p className="mb-2">{t('map.selectProperty') || 'Select a property'}</p>
-                    <p className="text-sm">{t('map.clickMarker') || 'Click on a map marker to view property details'}</p>
+                    <p className="mb-2">Select a property</p>
+                    <p className="text-sm">Click on a map marker to view property details</p>
                   </div>
                 </CardContent>
               </Card>
